@@ -8,6 +8,10 @@ import { Text } from '@/components/ui/text';
 import { Button, ButtonText } from '@/components/ui/button';
 import { useRouter } from 'expo-router';
 import { Icon } from '@/components/ui/icon';
+import { Input, InputField } from '@/components/ui/input';
+import { FormControl, FormControlLabel, FormControlLabelText } from '@/components/ui/form-control';
+import { Image } from '@/components/ui/image';
+import { Center } from '@/components/ui/center';
 
 const FeatureCard = ({ iconSvg: IconSvg, name, desc }: any) => {
   return (
@@ -24,40 +28,34 @@ const FeatureCard = ({ iconSvg: IconSvg, name, desc }: any) => {
   );
 };
 
+
 export default function Home() {
   const router = useRouter();
   return (
-    <Box className="flex-1 bg-background-300 h-[100vh]">
-        <Box className="absolute h-[500px] w-[500px] lg:w-[700px] lg:h-[700px]">
-          <Gradient />
-        </Box>
-      {/* <ScrollView
-        style={{ height: '100%' }}
-        contentContainerStyle={{ flexGrow: 1 }}
-      > */}
-        <Box className="flex flex-1 items-center mx-5 lg:my-24 lg:mx-32 py-safe">
-          <Box className="gap-10 base:flex-col sm:flex-row justify-between sm:w-[80%] md:flex-1">
-            <Box className="bg-background-template py-2 px-6 rounded-full items-center flex-column md:flex-row md:self-start">
-              <Text className="text-white font-medium">
-                Get started by editing
-              </Text>
-              <Text className="text-white font-medium ml-2">./App.tsx or ./app/index.tsx (or whatever entry point you have)</Text>
-            </Box>
-            <Button
-              size="md"
-              className="bg-primary-500 px-6 py-2 rounded-full"
-              onPress={() => {
-                router.push('/tabs/tab1');
-              }}
-            >
-              <ButtonText>Explore Tab Navigation</ButtonText>
-            </Button>
-          </Box>
-          <Box className="flex-1 justify-center items-center h-[20px] w-[300px] lg:h-[160px] lg:w-[400px]">
-            <Logo />
-          </Box>
-        </Box>
-      {/* </ScrollView> */}
+    <Box className="flex-1 bg-background-0 mt-20 mx-8">
+      <Center>
+        <Image size='3xl' source={require('../assets/images/nexo.png')}/>
+      </Center>
+      <Box className='mt-8'>
+        <Text className="text-3xl color-blue-600 font-bold mb-2">Mobilidade com propósito.</Text>
+        <Text className="color-blue-600 mb-8 font-bold text-3xl">Bem vindo ao Nexo!</Text>
+      </Box>
+      <Box className='flex-1 gap-2'>
+        <Button className='bg-blue-600 rounded-full active:bg-blue-400'>
+          <ButtonText 
+          // onPress={() => router.push('/login')} 
+          >
+          Primeiro Acesso
+          </ButtonText>
+        </Button>
+        <Button className='bg-gray-300 color-blue-600 rounded-full'>
+          <ButtonText className='color-blue-600'
+          // onPress={() => router.push('/register')} 
+          >
+          Entrar
+          </ButtonText>
+        </Button>
+      </Box>
     </Box>
   );
 }
