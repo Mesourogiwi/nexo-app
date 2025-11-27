@@ -1,15 +1,15 @@
 module.exports = function (api) {
-  api.cache(true);
+  api.cache(true)
 
   return {
     presets: [
       [
         'babel-preset-expo',
         {
-          jsxImportSource: 'nativewind',
-        },
+          jsxImportSource: 'nativewind'
+        }
       ],
-      'nativewind/babel',
+      'nativewind/babel'
     ],
 
     plugins: [
@@ -20,11 +20,11 @@ module.exports = function (api) {
 
           alias: {
             '@': './',
-            'tailwind.config': './tailwind.config.js',
-          },
-        },
+            'tailwind.config': './tailwind.config.js'
+          }
+        }
       ],
-      'react-native-reanimated/plugin',
-    ],
-  };
-};
+      'react-native-reanimated/plugin'
+    ]
+  }
+}

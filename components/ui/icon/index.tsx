@@ -1,35 +1,31 @@
-import React from 'react';
-import { createIcon } from '@gluestack-ui/core/icon/creator';
-import { Path } from 'react-native-svg';
-import { tva } from '@gluestack-ui/utils/nativewind-utils';
-import { cssInterop } from 'nativewind';
-import { VariantProps } from '@gluestack-ui/utils/nativewind-utils';
-import {
-  PrimitiveIcon,
-  IPrimitiveIcon,
-  Svg,
-} from '@gluestack-ui/core/icon/creator';
+import React from 'react'
+import {createIcon} from '@gluestack-ui/core/icon/creator'
+import {Path} from 'react-native-svg'
+import {tva} from '@gluestack-ui/utils/nativewind-utils'
+import {cssInterop} from 'nativewind'
+import {VariantProps} from '@gluestack-ui/utils/nativewind-utils'
+import {PrimitiveIcon, IPrimitiveIcon, Svg} from '@gluestack-ui/core/icon/creator'
 
 export const UIIcon = createIcon({
-  Root: PrimitiveIcon,
+  Root: PrimitiveIcon
 }) as React.ForwardRefExoticComponent<
   React.ComponentPropsWithoutRef<typeof PrimitiveIcon> &
     React.RefAttributes<React.ComponentRef<typeof Svg>>
->;
+>
 
 const iconStyle = tva({
   base: 'text-typography-950 fill-none pointer-events-none',
   variants: {
     size: {
       '2xs': 'h-3 w-3',
-      'xs': 'h-3.5 w-3.5',
-      'sm': 'h-4 w-4',
-      'md': 'h-[18px] w-[18px]',
-      'lg': 'h-5 w-5',
-      'xl': 'h-6 w-6',
-    },
-  },
-});
+      xs: 'h-3.5 w-3.5',
+      sm: 'h-4 w-4',
+      md: 'h-[18px] w-[18px]',
+      lg: 'h-5 w-5',
+      xl: 'h-6 w-6'
+    }
+  }
+})
 
 cssInterop(UIIcon, {
   className: {
@@ -39,104 +35,72 @@ cssInterop(UIIcon, {
       width: true,
       fill: true,
       color: 'classNameColor',
-      stroke: true,
-    },
-  },
-});
+      stroke: true
+    }
+  }
+})
 
 type IIConProps = IPrimitiveIcon &
   VariantProps<typeof iconStyle> &
-  React.ComponentPropsWithoutRef<typeof UIIcon>;
+  React.ComponentPropsWithoutRef<typeof UIIcon>
 
-const Icon = React.forwardRef<React.ComponentRef<typeof UIIcon>, IIConProps>(
-  function Icon({ size = 'md', className, ...props }, ref) {
-    if (typeof size === 'number') {
-      return (
-        <UIIcon
-          ref={ref}
-          {...props}
-          className={iconStyle({ class: className })}
-          size={size}
-        />
-      );
-    } else if (
-      (props.height !== undefined || props.width !== undefined) &&
-      size === undefined
-    ) {
-      return (
-        <UIIcon
-          ref={ref}
-          {...props}
-          className={iconStyle({ class: className })}
-        />
-      );
-    }
-    return (
-      <UIIcon
-        ref={ref}
-        {...props}
-        className={iconStyle({ size, class: className })}
-      />
-    );
+const Icon = React.forwardRef<React.ComponentRef<typeof UIIcon>, IIConProps>(function Icon(
+  {size = 'md', className, ...props},
+  ref
+) {
+  if (typeof size === 'number') {
+    return <UIIcon ref={ref} {...props} className={iconStyle({class: className})} size={size} />
+  } else if ((props.height !== undefined || props.width !== undefined) && size === undefined) {
+    return <UIIcon ref={ref} {...props} className={iconStyle({class: className})} />
   }
-);
+  return <UIIcon ref={ref} {...props} className={iconStyle({size, class: className})} />
+})
 
-export { Icon };
+export {Icon}
 
-type ParameterTypes = Omit<Parameters<typeof createIcon>[0], 'Root'>;
+type ParameterTypes = Omit<Parameters<typeof createIcon>[0], 'Root'>
 
-const createIconUI = ({ ...props }: ParameterTypes) => {
+const createIconUI = ({...props}: ParameterTypes) => {
   const UIIconCreateIcon = createIcon({
     Root: Svg,
-    ...props,
+    ...props
   }) as React.ForwardRefExoticComponent<
     React.ComponentPropsWithoutRef<typeof PrimitiveIcon> &
       React.RefAttributes<React.ComponentRef<typeof Svg>>
-  >;
+  >
 
   return React.forwardRef<React.ComponentRef<typeof Svg>>(function UIIcon(
     {
       className,
       size,
       ...inComingProps
-    }: VariantProps<typeof iconStyle> &
-      React.ComponentPropsWithoutRef<typeof UIIconCreateIcon>,
+    }: VariantProps<typeof iconStyle> & React.ComponentPropsWithoutRef<typeof UIIconCreateIcon>,
     ref
   ) {
     return (
       <UIIconCreateIcon
         ref={ref}
         {...inComingProps}
-        className={iconStyle({ size, class: className })}
+        className={iconStyle({size, class: className})}
       />
-    );
-  });
-};
-export { createIconUI as createIcon };
+    )
+  })
+}
+export {createIconUI as createIcon}
 // All Icons
 const AddIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M12 5V19"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M5 12H19"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M12 5V19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M5 12H19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-AddIcon.displayName = 'AddIcon';
-export { AddIcon };
+AddIcon.displayName = 'AddIcon'
+export {AddIcon}
 
 const AlertCircleIcon = createIcon({
   Root: Svg,
@@ -149,45 +113,25 @@ const AlertCircleIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M12 8V12"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M12 16H12.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M12 8V12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M12 16H12.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-AlertCircleIcon.displayName = 'AlertCircleIcon';
-export { AlertCircleIcon };
+AlertCircleIcon.displayName = 'AlertCircleIcon'
+export {AlertCircleIcon}
 
 const ArrowUpIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M12 19V5"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M5 12L12 5L19 12"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M12 19V5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M5 12L12 5L19 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ArrowDownIcon = createIcon({
   Root: Svg,
@@ -195,21 +139,11 @@ const ArrowDownIcon = createIcon({
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M12 5V19"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M19 12L12 19L5 12"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M12 5V19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M19 12L12 19L5 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ArrowRightIcon = createIcon({
   Root: Svg,
@@ -217,49 +151,29 @@ const ArrowRightIcon = createIcon({
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M5 12H19"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M12 5L19 12L12 19"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M5 12H19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M12 5L19 12L12 19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ArrowLeftIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M19 12H5"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M12 19L5 12L12 5"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M19 12H5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M12 19L5 12L12 5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-ArrowUpIcon.displayName = 'ArrowUpIcon';
-ArrowDownIcon.displayName = 'ArrowDownIcon';
-ArrowRightIcon.displayName = 'ArrowRightIcon';
-ArrowLeftIcon.displayName = 'ArrowLeftIcon';
+ArrowUpIcon.displayName = 'ArrowUpIcon'
+ArrowDownIcon.displayName = 'ArrowDownIcon'
+ArrowRightIcon.displayName = 'ArrowRightIcon'
+ArrowLeftIcon.displayName = 'ArrowLeftIcon'
 
-export { ArrowUpIcon, ArrowDownIcon, ArrowRightIcon, ArrowLeftIcon };
+export {ArrowUpIcon, ArrowDownIcon, ArrowRightIcon, ArrowLeftIcon}
 
 const AtSignIcon = createIcon({
   Root: Svg,
@@ -281,12 +195,12 @@ const AtSignIcon = createIcon({
         />
       </>
     </>
-  ),
-});
+  )
+})
 
-AtSignIcon.displayName = 'AtSignIcon';
+AtSignIcon.displayName = 'AtSignIcon'
 
-export { AtSignIcon };
+export {AtSignIcon}
 
 const BellIcon = createIcon({
   Root: Svg,
@@ -306,12 +220,12 @@ const BellIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-BellIcon.displayName = 'BellIcon';
+BellIcon.displayName = 'BellIcon'
 
-export { BellIcon };
+export {BellIcon}
 
 const CalendarDaysIcon = createIcon({
   Root: Svg,
@@ -324,82 +238,32 @@ const CalendarDaysIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M16 2V6"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M8 2V6"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M3 10H21"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M8 14H8.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M12 14H12.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M16 14H16.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M8 18H8.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M12 18H12.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M16 18H16.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M16 2V6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M8 2V6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M3 10H21" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M8 14H8.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M12 14H12.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M16 14H16.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M8 18H8.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M12 18H12.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M16 18H16.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-CalendarDaysIcon.displayName = 'CalendarDaysIcon';
+CalendarDaysIcon.displayName = 'CalendarDaysIcon'
 
-export { CalendarDaysIcon };
+export {CalendarDaysIcon}
 
 const CheckIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M20 6L9 17L4 12"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M20 6L9 17L4 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const CheckCircleIcon = createIcon({
   Root: Svg,
@@ -412,20 +276,15 @@ const CheckCircleIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M9 12L11 14L15 10"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M9 12L11 14L15 10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-CheckIcon.displayName = 'CheckIcon';
-CheckCircleIcon.displayName = 'CheckCircleIcon';
+CheckIcon.displayName = 'CheckIcon'
+CheckCircleIcon.displayName = 'CheckCircleIcon'
 
-export { CheckIcon, CheckCircleIcon };
+export {CheckIcon, CheckCircleIcon}
 
 const ChevronUpIcon = createIcon({
   Root: Svg,
@@ -433,45 +292,30 @@ const ChevronUpIcon = createIcon({
   d: 'M12 10L8 6L4 10',
   path: (
     <>
-      <Path
-        d="M18 15L12 9L6 15"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M18 15L12 9L6 15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ChevronDownIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M6 9L12 15L18 9"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M6 9L12 15L18 9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ChevronLeftIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M15 18L9 12L15 6"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M15 18L9 12L15 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ChevronRightIcon = createIcon({
   Root: Svg,
@@ -479,15 +323,10 @@ const ChevronRightIcon = createIcon({
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M9 18L15 12L9 6"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M9 18L15 12L9 6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ChevronsLeftIcon = createIcon({
   Root: Svg,
@@ -495,21 +334,11 @@ const ChevronsLeftIcon = createIcon({
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M11 17L6 12L11 7"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M18 17L13 12L18 7"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M11 17L6 12L11 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M18 17L13 12L18 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ChevronsRightIcon = createIcon({
   Root: Svg,
@@ -517,21 +346,11 @@ const ChevronsRightIcon = createIcon({
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M13 17L18 12L13 7"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M6 17L11 12L6 7"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M13 17L18 12L13 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M6 17L11 12L6 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const ChevronsUpDownIcon = createIcon({
   Root: Svg,
@@ -539,29 +358,19 @@ const ChevronsUpDownIcon = createIcon({
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M7 15L12 20L17 15"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M7 9L12 4L17 9"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M7 15L12 20L17 15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M7 9L12 4L17 9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-ChevronUpIcon.displayName = 'ChevronUpIcon';
-ChevronDownIcon.displayName = 'ChevronDownIcon';
-ChevronLeftIcon.displayName = 'ChevronLeftIcon';
-ChevronRightIcon.displayName = 'ChevronRightIcon';
-ChevronsLeftIcon.displayName = 'ChevronsLeftIcon';
-ChevronsRightIcon.displayName = 'ChevronsRightIcon';
-ChevronsUpDownIcon.displayName = 'ChevronsUpDownIcon';
+ChevronUpIcon.displayName = 'ChevronUpIcon'
+ChevronDownIcon.displayName = 'ChevronDownIcon'
+ChevronLeftIcon.displayName = 'ChevronLeftIcon'
+ChevronRightIcon.displayName = 'ChevronRightIcon'
+ChevronsLeftIcon.displayName = 'ChevronsLeftIcon'
+ChevronsRightIcon.displayName = 'ChevronsRightIcon'
+ChevronsUpDownIcon.displayName = 'ChevronsUpDownIcon'
 
 export {
   ChevronUpIcon,
@@ -570,8 +379,8 @@ export {
   ChevronRightIcon,
   ChevronsLeftIcon,
   ChevronsRightIcon,
-  ChevronsUpDownIcon,
-};
+  ChevronsUpDownIcon
+}
 
 const CircleIcon = createIcon({
   Root: Svg,
@@ -585,12 +394,12 @@ const CircleIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-CircleIcon.displayName = 'CircleIcon';
+CircleIcon.displayName = 'CircleIcon'
 
-export { CircleIcon };
+export {CircleIcon}
 
 const ClockIcon = createIcon({
   Root: Svg,
@@ -603,40 +412,25 @@ const ClockIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M12 6V12L16 14"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M12 6V12L16 14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-ClockIcon.displayName = 'ClockIcon';
+ClockIcon.displayName = 'ClockIcon'
 
-export { ClockIcon };
+export {ClockIcon}
 
 const CloseIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M18 6L6 18"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M6 6L18 18"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M18 6L6 18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M6 6L18 18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
 const CloseCircleIcon = createIcon({
   Root: Svg,
@@ -649,26 +443,16 @@ const CloseCircleIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M15 9L9 15"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M9 9L15 15"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M15 9L9 15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M9 9L15 15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-CloseIcon.displayName = 'CloseIcon';
-CloseCircleIcon.displayName = 'CloseCircleIcon';
+CloseIcon.displayName = 'CloseIcon'
+CloseCircleIcon.displayName = 'CloseCircleIcon'
 
-export { CloseIcon, CloseCircleIcon };
+export {CloseIcon, CloseCircleIcon}
 
 const CopyIcon = createIcon({
   Root: Svg,
@@ -688,12 +472,12 @@ const CopyIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-CopyIcon.displayName = 'CopyIcon';
+CopyIcon.displayName = 'CopyIcon'
 
-export { CopyIcon };
+export {CopyIcon}
 
 const DownloadIcon = createIcon({
   Root: Svg,
@@ -706,24 +490,14 @@ const DownloadIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M7 10L12 15L17 10"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M12 15V3"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M7 10L12 15L17 10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M12 15V3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-DownloadIcon.displayName = 'DownloadIcon';
-export { DownloadIcon };
+DownloadIcon.displayName = 'DownloadIcon'
+export {DownloadIcon}
 
 const EditIcon = createIcon({
   Root: Svg,
@@ -743,11 +517,11 @@ const EditIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-EditIcon.displayName = 'EditIcon';
-export { EditIcon };
+EditIcon.displayName = 'EditIcon'
+export {EditIcon}
 
 const EyeIcon = createIcon({
   Root: Svg,
@@ -767,10 +541,10 @@ const EyeIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-EyeIcon.displayName = 'EyeIcon';
+EyeIcon.displayName = 'EyeIcon'
 
 const EyeOffIcon = createIcon({
   Root: Svg,
@@ -795,18 +569,13 @@ const EyeOffIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M2 2L22 22"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M2 2L22 22" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-EyeOffIcon.displayName = 'EyeOffIcon';
-export { EyeIcon, EyeOffIcon };
+EyeOffIcon.displayName = 'EyeOffIcon'
+export {EyeIcon, EyeOffIcon}
 
 const FavouriteIcon = createIcon({
   Root: Svg,
@@ -820,11 +589,11 @@ const FavouriteIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-FavouriteIcon.displayName = 'FavouriteIcon';
-export { FavouriteIcon };
+FavouriteIcon.displayName = 'FavouriteIcon'
+export {FavouriteIcon}
 
 const GlobeIcon = createIcon({
   Root: Svg,
@@ -837,12 +606,7 @@ const GlobeIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M2 12H22"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M2 12H22" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <Path
         d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2V2Z"
         strokeWidth="2"
@@ -850,11 +614,11 @@ const GlobeIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-GlobeIcon.displayName = 'GlobeIcon';
-export { GlobeIcon };
+GlobeIcon.displayName = 'GlobeIcon'
+export {GlobeIcon}
 
 const GripVerticalIcon = createIcon({
   Root: Svg,
@@ -898,11 +662,11 @@ const GripVerticalIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-GripVerticalIcon.displayName = 'GripVerticalIcon';
-export { GripVerticalIcon };
+GripVerticalIcon.displayName = 'GripVerticalIcon'
+export {GripVerticalIcon}
 
 const HelpCircleIcon = createIcon({
   Root: Svg,
@@ -921,18 +685,13 @@ const HelpCircleIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M12 17H12.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M12 17H12.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-HelpCircleIcon.displayName = 'HelpCircleIcon';
-export { HelpCircleIcon };
+HelpCircleIcon.displayName = 'HelpCircleIcon'
+export {HelpCircleIcon}
 
 const InfoIcon = createIcon({
   Root: Svg,
@@ -945,24 +704,14 @@ const InfoIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M12 16V12"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M12 8H12.01"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M12 16V12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M12 8H12.01" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-InfoIcon.displayName = 'InfoIcon';
-export { InfoIcon };
+InfoIcon.displayName = 'InfoIcon'
+export {InfoIcon}
 
 const LinkIcon = createIcon({
   Root: Svg,
@@ -982,10 +731,10 @@ const LinkIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-LinkIcon.displayName = 'LinkIcon';
+LinkIcon.displayName = 'LinkIcon'
 
 const ExternalLinkIcon = createIcon({
   Root: Svg,
@@ -998,24 +747,14 @@ const ExternalLinkIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M15 3H21V9"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M10 14L21 3"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M15 3H21V9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M10 14L21 3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-ExternalLinkIcon.displayName = 'ExternalLinkIcon';
-export { LinkIcon, ExternalLinkIcon };
+ExternalLinkIcon.displayName = 'ExternalLinkIcon'
+export {LinkIcon, ExternalLinkIcon}
 
 const LoaderIcon = createIcon({
   Root: Svg,
@@ -1029,11 +768,11 @@ const LoaderIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-LoaderIcon.displayName = 'LoaderIcon';
-export { LoaderIcon };
+LoaderIcon.displayName = 'LoaderIcon'
+export {LoaderIcon}
 
 const LockIcon = createIcon({
   Root: Svg,
@@ -1053,11 +792,11 @@ const LockIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-LockIcon.displayName = 'LockIcon';
-export { LockIcon };
+LockIcon.displayName = 'LockIcon'
+export {LockIcon}
 
 const MailIcon = createIcon({
   Root: Svg,
@@ -1077,41 +816,26 @@ const MailIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-MailIcon.displayName = 'MailIcon';
-export { MailIcon };
+MailIcon.displayName = 'MailIcon'
+export {MailIcon}
 
 const MenuIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M4 12H20"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M4 6H20"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M4 18H20"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M4 12H20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M4 6H20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M4 18H20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-MenuIcon.displayName = 'MenuIcon';
-export { MenuIcon };
+MenuIcon.displayName = 'MenuIcon'
+export {MenuIcon}
 
 const MessageCircleIcon = createIcon({
   Root: Svg,
@@ -1125,12 +849,12 @@ const MessageCircleIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-MessageCircleIcon.displayName = 'MessageCircleIcon';
+MessageCircleIcon.displayName = 'MessageCircleIcon'
 
-export { MessageCircleIcon };
+export {MessageCircleIcon}
 
 const MoonIcon = createIcon({
   Root: Svg,
@@ -1144,11 +868,11 @@ const MoonIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-MoonIcon.displayName = 'MoonIcon';
-export { MoonIcon };
+MoonIcon.displayName = 'MoonIcon'
+export {MoonIcon}
 
 const PaperclipIcon = createIcon({
   Root: Svg,
@@ -1162,11 +886,11 @@ const PaperclipIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-PaperclipIcon.displayName = 'PaperclipIcon';
-export { PaperclipIcon };
+PaperclipIcon.displayName = 'PaperclipIcon'
+export {PaperclipIcon}
 
 const PhoneIcon = createIcon({
   Root: Svg,
@@ -1180,11 +904,11 @@ const PhoneIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-PhoneIcon.displayName = 'PhoneIcon';
-export { PhoneIcon };
+PhoneIcon.displayName = 'PhoneIcon'
+export {PhoneIcon}
 
 const PlayIcon = createIcon({
   Root: Svg,
@@ -1197,60 +921,40 @@ const PlayIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M10 8L16 12L10 16V8Z"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M10 8L16 12L10 16V8Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-PlayIcon.displayName = 'PlayIcon';
-export { PlayIcon };
+PlayIcon.displayName = 'PlayIcon'
+export {PlayIcon}
 
 const RemoveIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M5 12H19"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M5 12H19" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-RemoveIcon.displayName = 'RemoveIcon';
-export { RemoveIcon };
+RemoveIcon.displayName = 'RemoveIcon'
+export {RemoveIcon}
 
 const RepeatIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M17 2L21 6L17 10"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M17 2L21 6L17 10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <Path
         d="M3 11V10C3 8.93913 3.42143 7.92172 4.17157 7.17157C4.92172 6.42143 5.93913 6 7 6H21"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M7 22L3 18L7 14"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M7 22L3 18L7 14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <Path
         d="M21 13V14C21 15.0609 20.5786 16.0783 19.8284 16.8284C19.0783 17.5786 18.0609 18 17 18H3"
         strokeWidth="2"
@@ -1258,52 +962,37 @@ const RepeatIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-RepeatIcon.displayName = 'RepeatIcon';
+RepeatIcon.displayName = 'RepeatIcon'
 
 const Repeat1Icon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M17 2L21 6L17 10"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M17 2L21 6L17 10" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <Path
         d="M3 11V10C3 8.93913 3.42143 7.92172 4.17157 7.17157C4.92172 6.42143 5.93913 6 7 6H21"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M7 22L3 18L7 14"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M7 22L3 18L7 14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <Path
         d="M21 13V14C21 15.0609 20.5786 16.0783 19.8284 16.8284C19.0783 17.5786 18.0609 18 17 18H3"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M11 10H12V14"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M11 10H12V14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-Repeat1Icon.displayName = 'Repeat1Icon';
-export { RepeatIcon, Repeat1Icon };
+Repeat1Icon.displayName = 'Repeat1Icon'
+export {RepeatIcon, Repeat1Icon}
 
 const SearchIcon = createIcon({
   Root: Svg,
@@ -1316,18 +1005,13 @@ const SearchIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M21 21L16.65 16.65"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M21 21L16.65 16.65" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </>
-  ),
-});
+  )
+})
 
-SearchIcon.displayName = 'SearchIcon';
-export { SearchIcon };
+SearchIcon.displayName = 'SearchIcon'
+export {SearchIcon}
 
 const SettingsIcon = createIcon({
   Root: Svg,
@@ -1347,11 +1031,11 @@ const SettingsIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-SettingsIcon.displayName = 'SettingsIcon';
-export { SettingsIcon };
+SettingsIcon.displayName = 'SettingsIcon'
+export {SettingsIcon}
 
 const ShareIcon = createIcon({
   Root: Svg,
@@ -1389,11 +1073,11 @@ const ShareIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-ShareIcon.displayName = 'ShareIcon';
-export { ShareIcon };
+ShareIcon.displayName = 'ShareIcon'
+export {ShareIcon}
 
 const SlashIcon = createIcon({
   Root: Svg,
@@ -1413,11 +1097,11 @@ const SlashIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-SlashIcon.displayName = 'SlashIcon';
-export { SlashIcon };
+SlashIcon.displayName = 'SlashIcon'
+export {SlashIcon}
 
 const StarIcon = createIcon({
   Root: Svg,
@@ -1431,11 +1115,11 @@ const StarIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-StarIcon.displayName = 'StarIcon';
-export { StarIcon };
+StarIcon.displayName = 'StarIcon'
+export {StarIcon}
 
 const SunIcon = createIcon({
   Root: Svg,
@@ -1448,18 +1132,8 @@ const SunIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M12 2V4"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M12 20V22"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M12 2V4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M12 20V22" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <Path
         d="M4.92999 4.93L6.33999 6.34"
         strokeWidth="2"
@@ -1472,18 +1146,8 @@ const SunIcon = createIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <Path
-        d="M2 12H4"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M20 12H22"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M2 12H4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <Path d="M20 12H22" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <Path
         d="M6.33999 17.66L4.92999 19.07"
         strokeWidth="2"
@@ -1497,11 +1161,11 @@ const SunIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-SunIcon.displayName = 'SunIcon';
-export { SunIcon };
+SunIcon.displayName = 'SunIcon'
+export {SunIcon}
 
 const ThreeDotsIcon = createIcon({
   Root: Svg,
@@ -1527,23 +1191,18 @@ const ThreeDotsIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-ThreeDotsIcon.displayName = 'ThreeDotsIcon';
-export { ThreeDotsIcon };
+ThreeDotsIcon.displayName = 'ThreeDotsIcon'
+export {ThreeDotsIcon}
 
 const TrashIcon = createIcon({
   Root: Svg,
   viewBox: '0 0 24 24',
   path: (
     <>
-      <Path
-        d="M3 6H21"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <Path d="M3 6H21" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <Path
         d="M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6"
         strokeWidth="2"
@@ -1557,11 +1216,11 @@ const TrashIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-TrashIcon.displayName = 'TrashIcon';
-export { TrashIcon };
+TrashIcon.displayName = 'TrashIcon'
+export {TrashIcon}
 
 const UnlockIcon = createIcon({
   Root: Svg,
@@ -1581,8 +1240,8 @@ const UnlockIcon = createIcon({
         strokeLinejoin="round"
       />
     </>
-  ),
-});
+  )
+})
 
-UnlockIcon.displayName = 'UnlockIcon';
-export { UnlockIcon };
+UnlockIcon.displayName = 'UnlockIcon'
+export {UnlockIcon}
